@@ -19,7 +19,7 @@ const parseArgs = (args: string[]): Values => {
 
 
 const calculateBmi = (height: number, weight: number) => {
-   let bmi = (weight / (height / 100)**2);
+   const bmi = (weight / (height / 100)**2);
 
     if (bmi < 18.5) {
         console.log('low range');
