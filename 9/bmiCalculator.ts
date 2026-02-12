@@ -22,13 +22,13 @@ const calculateBmi = (height: number, weight: number) => {
    const bmi = (weight / (height / 100)**2);
 
     if (bmi < 18.5) {
-        console.log('low range');
+        console.log(String('low range'));
      } else if (bmi < 25) {
-        console.log('normal range');
+        console.log(String('normal range'));
      } else if (25 < bmi && bmi < 30) {
-        console.log('high range');
+        console.log(String('high range'));
      } else {
-        console.log('highest range');
+        console.log(String('highest range'));
      }
 }
 

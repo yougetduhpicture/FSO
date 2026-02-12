@@ -9,11 +9,37 @@ interface ReturnObject {
     average: number;
 }
 
+interface InputValues {
+    target: number;
+    dailyHours: number[];
+}
 
-const calculateExcercises = (dailyHours: number[], target: number): ReturnObject => {
+const parser = (args: string[]): InputValues => {
+   let dh:number[] = [];
+   const relevantArgs = args.slice(3);
+
+   relevantArgs.map((x) => {
+    if (!isNaN(parseFloat(String(x)))){
+      dh.push(parseFloat(x));
+    }
+   }
+   )
+  if (!isNaN(Number.parseFloat(args[2]))) {
+    
+    return {
+      target: Number.parseFloat(args[2]),
+      dailyHours: dh
+    }
+  } else {
+    throw new Error('here Provided values were not numbers!');
+  }
+}
+
+
+const calculateExcercises = (target: number, dailyHours: number[]): ReturnObject => {
   
     let sum = 0;
-    dailyHours.forEach(dh => { sum += dh});
+    dailyHours.forEach(a => { sum += a});
 
     let rate = 1;
     let rateDesc = '';
@@ -30,7 +56,16 @@ const calculateExcercises = (dailyHours: number[], target: number): ReturnObject
 
 
 
-    return {
+   console.log( {
+        periodLength: Number(dailyHours.length),
+        trainingDays: Number(dailyHours.filter((dh) => dh > 0).length),
+        success: Boolean((sum/dailyHours.length) >= target),
+        rating: Number(rate),
+        ratingDescription: String(rateDesc),
+        target: Number(target),
+        average: Number(sum / dailyHours.length)
+    })
+    return{
         periodLength: Number(dailyHours.length),
         trainingDays: Number(dailyHours.filter((dh) => dh > 0).length),
         success: Boolean((sum/dailyHours.length) >= target),
@@ -42,4 +77,14 @@ const calculateExcercises = (dailyHours: number[], target: number): ReturnObject
     
 }
 
-console.log(calculateExcercises([3, 0, 2, 4.5, 0, 3, 1], 2))
+
+try {
+  const { target, dailyHours } = parser(process.argv);
+  calculateExcercises(target, dailyHours);
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happened.';
+  if (error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
+}
