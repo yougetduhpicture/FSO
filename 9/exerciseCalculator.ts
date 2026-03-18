@@ -21,17 +21,15 @@ const parser = (args: string[]): InputValues => {
    relevantArgs.map((x) => {
     if (!isNaN(parseFloat(String(x)))){
       dh.push(parseFloat(x));
-    }
-   }
-   )
-  if (!isNaN(Number.parseFloat(args[2]))) {
+    }})
     
+  if (!isNaN(Number.parseFloat(args[2]))) { 
     return {
       target: Number.parseFloat(args[2]),
       dailyHours: dh
     }
   } else {
-    throw new Error('here Provided values were not numbers!');
+    throw new Error('Provided values were not numbers!');
   }
 }
 
@@ -53,9 +51,6 @@ const calculateExcercises = (target: number, dailyHours: number[]): ReturnObject
     } else {
         rateDesc = 'The only way now is up :)'
     }
-
-
-
    console.log( {
         periodLength: Number(dailyHours.length),
         trainingDays: Number(dailyHours.filter((dh) => dh > 0).length),
