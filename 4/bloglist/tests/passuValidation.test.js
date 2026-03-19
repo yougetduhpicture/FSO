@@ -23,7 +23,26 @@ test('posting user with too short password returns 400', async () => {
     password: 'se',
     name: 'New User',
   }
+  const postResponse = await api.post('/api/users').send(newUser)
+  assert.strictEqual(postResponse.status, 400)
+})
 
+test('no user returns 400', async () => {
+  const newUser = {
+    username: '',
+    password: 'securepassword',
+    name: 'New User',
+  }
+  const postResponse = await api.post('/api/users').send(newUser)
+  assert.strictEqual(postResponse.status, 400)
+})
+
+test('no name returns 400', async () => {
+  const newUser = {
+    username: 'newuser',
+    password: 'se234gha5yggbf',
+    name: '',
+  }
   const postResponse = await api.post('/api/users').send(newUser)
   assert.strictEqual(postResponse.status, 400)
 })
