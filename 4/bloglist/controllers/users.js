@@ -31,7 +31,9 @@ usersRouter.post('/', async (request, response) => {
 
 // Get all users
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({})
+  const users = await User
+    .find({})
+
   response.json(users)
 
 })

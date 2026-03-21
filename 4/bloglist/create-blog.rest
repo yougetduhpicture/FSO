@@ -1,9 +1,10 @@
-POST http://localhost:3003/api/blogs
+POST http://localhost:3001/api/blogs
 content-type: application/json
 
 {
-    "title": "The Needle Drop",
+  "title": "The Needle Drop",
   "author": "Anthony Fantano",
   "url": "https://theneedledrop.com/",
-  "likes": 5000
+  "likes": 5000,
+  "user": "6968dc4a7176bfe2a595e9e1"
 }

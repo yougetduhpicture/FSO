@@ -30,8 +30,7 @@ test('posting user with too short username returns 400', async () => {
   console.log(postResponse.body)
 
   const afterResponse = await api.get('/api/users')
-
-    assert.strictEqual(preResponse.body.length, afterResponse.body.length)
+  assert.strictEqual(preResponse.body.length, afterResponse.body.length)
 })
 
 after(async () => {
