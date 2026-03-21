@@ -1,5 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 // Get all blogs
 blogsRouter.get('/', async (request, response) => {
@@ -18,6 +19,10 @@ blogsRouter.post('/', async (request, response, next) => {
       .save()
       await savedBlog.populate('user', {username: 1, name: 1, id: 1})
 
+      // add blog to user's blogs array
+      await User.findByIdAndUpdate(savedBlog.user, {
+            $push: { blogs: savedBlog._id }
+      })
     response.status(201).json(savedBlog)
   } catch (error) {
     next(error)
